@@ -52,6 +52,7 @@ void testCase(){
         for(int j = 1; j <= N; j++){
             printf("%d", output_data_270[i][j]);
         }
+		printf("\n");
     }
     
     
