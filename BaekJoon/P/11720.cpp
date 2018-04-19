@@ -1,14 +1,17 @@
-#include <cstdio>
 
-int main() {
-	int N;
-	scanf("%d", &N);
-	int N2;
-	int sum = 0;
-	while (N--) {
-		scanf("%1d", &N2);
-		sum += N2;
-	}
-	printf("%d", sum);
-	return 0;
+#include <iostream>
+using namespace std;
+
+int main(){
+    int N;
+    cin >> N;
+    int A;
+    int Sum = 0;
+    while(N--){
+        while(scanf("%d",&A)==1){
+            Sum+=A;
+        }
+        printf("%d",Sum);
+    }
+    return 0;
 }

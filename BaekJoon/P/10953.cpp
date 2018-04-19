@@ -1,22 +1,15 @@
 #include <iostream>
-#include <cstdio>
 #include <string>
 using namespace std;
 
-int main() {
-	int T;
-	scanf("%d", &T);
-	string s1;
-	string s2;
-
-	int A, B;
-	while (T--) {
-		getline(cin, s1, ',');
-		A = stoi(s1);
-		getline(cin, s2);
-		B = stoi(s2);
-		printf("%d\n", A+B);
-	}
-
-	return 0;
+int main(){
+    int T;
+    int A, B;
+    char C;
+    scanf("%d" , &T);
+    while(T--){
+        scanf("%d%c%d",&A,&C,&B);
+		printf("%d",A+B);
+    }
+    return 0;
 }
