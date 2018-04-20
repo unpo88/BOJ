@@ -325,4 +325,4 @@ ASALocalRun/
 *.sln
 *.vcxproj
 *.vcxproj.filters
-
+*.vscode
