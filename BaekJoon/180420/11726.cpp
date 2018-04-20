@@ -11,7 +11,7 @@ int main(){
     DP[2] = 2;
 
     for(int i = 3; i <= 1000; i++){
-        DP[i] = DP[i-2] + DP[i-1] % 10007;
+        DP[i] = (DP[i-2] + DP[i-1]) % 10007;
     }
 
     printf("%d", DP[N]);
