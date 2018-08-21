@@ -38,5 +38,16 @@ int main(){
         toId.push_back(Number);
     }
 
+    for(int i = 0; i < fromId.size(); i++){
+        int space = capacities[toId[i]] - bottles[toId[i]];         // 언제나 총합은 똑같다
+        int move = min(bottles[fromId[i]], space);                  // 가장 작은 값이 움직이는 값이 된다
+        bottles[fromId[i]] -= move;                                 // 빼준다
+        bottles[toId[i]] += move;                                   // 더해준다
+    }
+
+    for(int i = 0; i < bottles.size(); i++){
+        printf("%d ", bottles[i]);
+    }
+    
     return 0;
 }
