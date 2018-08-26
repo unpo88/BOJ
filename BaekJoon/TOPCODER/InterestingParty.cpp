@@ -1,12 +1,15 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <map>
 #include <algorithm>
 using namespace std;
 
 int main() {
 	std::ios::sync_with_stdio(false);
 	
+	map<string, int> dic;
+
 	vector<string> first;
 	vector<string> second;
 
@@ -25,6 +28,8 @@ int main() {
 	}
 
 	int answer;
+
+	/*
 	for (int i = 0; i < first.size(); i++) {
 		int first_answer = 0;
 		int second_answer = 0;
@@ -44,7 +49,23 @@ int main() {
 			answer = max(first_answer, second_answer);
 		}
 	}
+	*/
 
+	for (int i = 0; i < first.size(); i++) {
+		dic[first[i]] = 0;
+		dic[second[i]] = 0;
+	}
+
+	for (int i = 0; i < first.size(); i++) {
+		dic[first[i]]++;
+		dic[second[i]]++;
+	}
+
+	map<string, int>::iterator it;
+
+	for (it = dic.begin(); it != dic.end(); it++) {
+		answer = max(answer, it->second);
+	}
 	cout << answer;
 
 	return 0;
