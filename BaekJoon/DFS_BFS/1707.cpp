@@ -47,9 +47,14 @@ int main(){
                 int k = map[i][j];
                 if(color[k] == color[i]){
                     ok = false;
+                    break;
                 }
             }
+            if(!ok){
+                break;
+            }
         }
+        
         if(ok){
             cout << "YES\n";
         }
