@@ -8,8 +8,6 @@ long long max = 0;
 long long left = 0;
 long long right = LLONG_MAX;
 
-int cnt = 0;
-int cnt2 = 0;
 int main(){
     scanf("%d %d", &K, &N);
 
