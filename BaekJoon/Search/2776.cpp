@@ -1,18 +1,17 @@
 #include <cstdio>
 #include <algorithm>
-#include <vector>
-#include <cstring>
 using namespace std;
 
-int T, N, M;
+int testCase, N, M;
 
-int a[1000001];
+int a[100001];
 
-int K;
+int num;
 
 int main(){
-    scanf("%d", &T);
-    while(T--){
+    scanf("%d", &testCase);
+
+    while(testCase--){
         scanf("%d", &N);
         for(int i = 0; i < N; i++){
             scanf("%d", &a[i]);
@@ -21,22 +20,22 @@ int main(){
 
         scanf("%d", &M);
         while(M--){
-            scanf("%d", &K);
+            scanf("%d", &num);
             int left = 0;
             int right = N - 1;
-            int search = 0;
+            int answer = 0;
             while(left <= right){
                 int mid = (left + right) / 2;
-                if(a[mid] == K){
-                    search = 1;
+                if(a[mid] == num){
+                    answer = 1;
                     break;
-                }else if(a[mid] > K){
+                }else if(a[mid] > num){
                     right = mid - 1;
                 }else{
                     left = mid + 1;
                 }
             }
-            printf("%d\n", search);
+            printf("%d\n", answer);
         }
     }
 
