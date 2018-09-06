@@ -1,41 +1,41 @@
 #include <cstdio>
-#include <string>
-#include <iostream>
-using namespace std;
 
-int N;
+int N, input[64][64];
 
-string arr[100];
-
-string solve(int n, int y, int x, int jump){
-    if(n == 1){
-        string res = "";
-        res += arr[y][x];
-        return res;
-    }
-    
-    string first = "";
-    first += arr[y][x];
-    string lu = solve(n / 2, y, x, jump / 2);
-    string ru = solve(n / 2, y, x + jump, jump / 2);
-    string ld = solve(n / 2, y + jump, x, jump / 2);
-    string rd = solve(n / 2, y + jump, x + jump, jump / 2);
-
-    if(lu == first && ru == first && ld == first && rd == first){
-        return first;
+void solve(int x, int y, int size){
+    int cur = input[y][x];
+    bool flag = true;
+    for(int i = y; (i < y + size) && flag; i++){
+        for(int j = x; (j < x + size) && flag; j++){
+            if(cur != input[i][j]){
+                flag = false;
+            }
+        }
     }
 
-    return '(' + lu + ru + ld + rd + ')';
+    if(flag){
+        printf("%d", cur);
+    }else{
+        printf("(");
+        solve(x, y, size/2);
+        solve(x + size/2, y, size/2);
+        solve(x, y + size/2, size/2);
+        solve(x + size/2, y + size/2, size/2);
+        printf(")");
+    }
+
+    return ;
 }
 
 int main(){
     scanf("%d", &N);
 
-    getchar();
     for(int i = 0; i < N; i++){
-        getline(cin, arr[i]);
+        for(int j = 0; j < N; j++){
+            scanf("%1d", &input[i][j]);
+        }
     }
-    
-    cout << solve(N, 0, 0, N / 2);
+
+    solve(0, 0, N);
     return 0;
 }
