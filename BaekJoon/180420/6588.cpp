@@ -1,15 +1,15 @@
 #include <iostream>
 using namespace std;
 
-int isNotPrime[100003];
+int isNotPrime[1000001];
 
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    for(int i = 2; i * i < 100003; i++){
+    for(int i = 2; i * i < 1000001; i++){
         if(!isNotPrime[i]){
-            for(int j = i*i; j < 100003; j += i){
+            for(int j = i*i; j < 1000001; j += i){
                 isNotPrime[j] = 1;
             }
         }
