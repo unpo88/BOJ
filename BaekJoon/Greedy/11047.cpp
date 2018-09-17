@@ -1,37 +1,27 @@
 #include <cstdio>
-#include <algorithm>
-#include <vector>
-using namespace std;
 
-long long N;
+int N;
 long long K;
-vector<long long> v;
+int A[10];
 
 int answer;
-int cnt;
 
 int main(){
-    scanf("%lld %lld", &N, &K);
-
+    scanf("%d", &N);
+    scanf("%lld", &K);
     for(int i = 0; i < N; i++){
-        long long num;
-        scanf("%lld", &num);
-        v.push_back(num);
+        scanf("%d", &A[i]);
     }
 
-    reverse(v.begin(), v.end());
-
-    for(int i = 0; i < v.size(); i++){
-        if(v[i] > K){
-            continue;
-        }else{
-            answer = (K / v[i]);
-            cnt += answer;
-            K = K - (v[i] * answer);
+    for(int i = N - 1; i >= 0; i--){
+        if(A[i] <= K){
+            answer += K / A[i];
+            K = K % A[i];
         }
     }
 
-    printf("%d", cnt);
+    printf("%d\n", answer);
+
 
     return 0;
 }
