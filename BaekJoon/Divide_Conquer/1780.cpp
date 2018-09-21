@@ -1,65 +1,48 @@
 #include <cstdio>
 
-int N, input[2187][2187];
+int N;
+int map[2187][2187];
 
-int a[3] = { 0, };
+int answer[3];
 
-void solve(int x, int y, int size){
-    int cur = input[y][x];
-    bool flag = true;
-    for(int i = y; (i < y + size) && flag; i++){
-        for(int j = x; (j < x + size) && flag; j++){
-            if(cur != input[i][j]){
-                flag = false;
+bool same(int x, int y, int n){
+    for(int i = x; i < (x + n); i++){
+        for(int j = y; j < (y + n); j++){
+            if(map[x][y] != map[i][j]){
+                return false;
             }
         }
     }
+    return true;
+}
 
-    if(flag){
-        if(cur == -1){
-            a[0]++;
-        }else if(cur == 0){
-            a[1]++;
-        }else if(cur == 1){
-            a[2]++;
+void solve(int x, int y, int n){
+    if(same(x, y, n)){
+        answer[map[x][y] + 1] += 1;
+        return ;
+    }
+
+    int m = n / 3;
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            solve(x + i * m, y + j * m, m);
         }
-    }else if(size == 1 && !flag){
-        for(int i = y; (i < y + size) && flag; i++){
-            for(int j = y; (j < y + size) && flag; j++){
-                if(cur == -1){
-                    a[0]++;
-                }else if(cur == 0){
-                    a[1]++;
-                }else if(cur == 1){
-                    a[2]++;
-                }
-            }
-        }
-    }else{
-        solve(x, y, size/3);
-        solve(x + size/3, y, size/3);
-        solve(x + size/3*2, y, size/3);
-        solve(x, y + size/3, size/3);
-        solve(x + size/3, y + size/3, size/3);
-        solve(x + size/3*2, y + size/3, size/3);
-        solve(x, y + size/3*2, size/3);
-        solve(x + size/3, y + size/3*2, size/3);
-        solve(x + size/3*2, y + size/3*2, size/3);
     }
 }
 
 int main(){
     scanf("%d", &N);
+
     for(int i = 0; i < N; i++){
         for(int j = 0; j < N; j++){
-            scanf("%d", &input[i][j]);
+            scanf("%d", &map[i][j]);
         }
     }
 
     solve(0, 0, N);
 
     for(int i = 0; i < 3; i++){
-        printf("%d\n", a[i]);
+        printf("%d\n", answer[i]);
     }
 
     return 0;
