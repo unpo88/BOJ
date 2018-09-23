@@ -33,6 +33,7 @@ int main(){
     scanf("%d %d %d", &N, &r, &c);
     
     printf("%d\n", solve(N, r, c));
+    
     return 0;
 }
 
