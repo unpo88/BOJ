@@ -23,6 +23,14 @@ int main(){
             s[i][j] = s[i-1][j] + s[i][j-1] - s[i-1][j-1] + (long long)map[i][j];
         }
     }
+/*
+    for(int i = 1; i <= N; i++){
+        for(int j = 1; j <= M; j++){
+            printf("%lld ", s[i][j]);
+        }
+        printf("\n");
+    }
+*/
     // 1번 경우
     for(int i = 1; i <= M - 2; i++){
         for(int j = i + 1; j <= M - 1; j++){
