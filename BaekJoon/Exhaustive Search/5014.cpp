@@ -9,7 +9,7 @@ long long F,S,G,U,D;
 
 queue<pair<int, int> > q;
 
-int answer = - 1
+int answer = - 1;
 long long visit[1000001];
 
 int main(){
