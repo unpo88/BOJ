@@ -16,7 +16,6 @@ void cal(int index, int sum){
 
     if(sum == S){
         ans++;
-        return ;
     }
 
     cal(index + 1, sum - num[index]);
