@@ -1,71 +1,28 @@
 #include <iostream>
 using namespace std;
 
-// up, right, down, left
-const int dx[4] = { -1, 0, 1, 0 };
-const int dy[4] = { 0, 1, 0, -1 };
-
-// 로봇 바라보는 방향
-// 0 : 북, 1 : 동, 2 : 남, 3 : 서
-int d;
-
-// 지도
-int map[50][50];
-
-// 행, 렬
-int N, M;
-
-// 로봇 청소기 칸의 좌표
-int r, c;
-
-int ans = 0;
-
-int cnt = 0; 
-
-int DFS(int x, int y, int dir){
-    if(cnt == 4){
-        dir = (dir + 2) % 4;
-        int nx = x + dx[dir];
-        int ny = y + dy[dir];
-        cnt = 0;
-        if(nx >= 0 || ny >= 0 || nx < N || ny < M){
-            if(map[nx][ny] == 0){
-                DFS(nx, ny, dir);
-            }else{
-                return ans;
-            }
-        }
-    }
-
-    if(map[x][y] == 0){
-        map[x][y] = 2;
-        cout << x << " " << y << endl;
-        ans = ans + 1;
-    }
-
-
-    dir = (dir + 3) % 4;
-    
-    int nx = x + dx[dir];
-    int ny = y + dy[dir];
-
-    if(nx >= 0 || ny >= 0 || nx < N || ny < M){
-        if(map[nx][ny] == 0){
-            DFS(nx, ny, dir);
-        }else{
-            cnt = cnt + 1;
-            DFS(x, y, dir);
-        }
-    }
-    
-    return ans;
-}
-
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
 
+    // up, right, down, left
+    const int dx[4] = { -1, 0, 1, 0 };
+    const int dy[4] = { 0, 1, 0, -1 };
+
+    // 로봇 바라보는 방향
+    // 0 : 북, 1 : 동, 2 : 남, 3 : 서
+    int d;
+
+    // 지도
+    int map[50][50];
+
+    // 행, 렬
+    int N, M;
+
+    // 로봇 청소기 칸의 좌표
+    int r, c;
+    
     cin >> N >> M;
     cin >> r >> c >> d;
     
