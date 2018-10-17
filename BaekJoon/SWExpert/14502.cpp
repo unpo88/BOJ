@@ -31,7 +31,7 @@ int bfs(){
         for(int i = 0; i < 4; i++){
             int nx = x + dx[i];
             int ny = y + dy[i];
-            if(nx <= 0 || ny <= 0 || nx > N || ny > N)  continue;
+            if(nx <= 0 || ny <= 0 || nx > N || ny > M)  continue;
             if(check[nx][ny] == 0){
                 check[nx][ny] = 2;
                 q.push(make_pair(nx, ny));
