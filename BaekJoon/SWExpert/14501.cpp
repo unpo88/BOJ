@@ -3,21 +3,18 @@
 using namespace std;
 
 int N;
-
 int input[2][16];
 
-int dfs(int index){
-    if(index + input[0][index] >= N + 2){
-        return 0;
+int DFS(int idx){
+    if(input[0][idx] + idx > N + 1) return 0;
+    
+    int result = input[1][idx];
+    int sum = 0;
+    for(int i = idx + input[0][idx]; i <= N; i++){
+        sum = max(sum, DFS(i));
     }
 
-    int result = input[1][index];
-    int MAX = 0;
-    for(int i = index + input[0][index]; i <= N; i++){
-        MAX = max(MAX, dfs(i));
-    }
-
-    return result + MAX;
+    return result + sum;
 }
 
 int main(){
@@ -29,9 +26,10 @@ int main(){
 
     int answer = 0;
     for(int i = 1; i <= N; i++){
-        answer = max(answer, dfs(i));
+        answer = max(answer, DFS(i));
     }
 
-    cout << answer << '\n';
+    cout << answer << endl;
+
     return 0;
 }
