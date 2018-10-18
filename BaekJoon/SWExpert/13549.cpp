@@ -11,7 +11,7 @@ int N, K;
 
 queue<pair<int, int> > q;
 
-int visit[100000];
+int visit[200001];
 
 int main(){
     ios_base::sync_with_stdio(false);
