@@ -1,63 +1,49 @@
 #include <iostream>
 using namespace std;
 
+int N, M;
+int R, C, D;
+
+int map[51][51];
+
+const int dx[4] = { -1, 0, 1, 0 };
+const int dy[4] = { 0, 1, 0, -1 };
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
 
-    // up, right, down, left
-    const int dx[4] = { -1, 0, 1, 0 };
-    const int dy[4] = { 0, 1, 0, -1 };
-
-    // 로봇 바라보는 방향
-    // 0 : 북, 1 : 동, 2 : 남, 3 : 서
-    int d;
-
-    // 지도
-    int map[50][50];
-
-    // 행, 렬
-    int N, M;
-
-    // 로봇 청소기 칸의 좌표
-    int r, c;
-    
     cin >> N >> M;
-    cin >> r >> c >> d;
-    
-    // 빈 칸은 0, 벽은 1로 주어진다. 장소의 모든 외곽은 벽이다.
-    // 로봇 청소기가 있는 칸의 상태는 항상 빈 칸이다.
-    // 로봇 청소기가 청소하는 칸의 개수를 출력한다.
+    cin >> R >> C >> D;
+
     for(int i = 0; i < N; i++){
         for(int j = 0; j < M; j++){
             cin >> map[i][j];
         }
     }
 
-    int count = 0;
-
     while(true){
-        if(map[r][c] == 0){
-            map[r][c] = 2;
-        }
-        if(map[r+1][c] != 0 && map[r-1][c] != 0 && map[r][c-1] != 0 && map[r][c+1] != 0){
-            if(map[r-dx[d]][c-dy[d]] == 1 ){
+        map[R][C] = 2;
+
+        if(map[R-1][C] != 0 && map[R][C+1] != 0 && map[R+1][C] != 0 && map[R][C-1] != 0){
+            if(map[R-dx[D]][C-dy[D]] == 1){
                 break;
             }else{
-                r -= dx[d];
-                c -= dy[d];
+                R -= dx[D];
+                C -= dy[D];
             }
         }else{
-            d = (d + 3) % 4;
-            if(map[r+dx[d]][c+dy[d]] == 0){
-                r += dx[d];
-                c += dy[d];
+            D = (D + 3) % 4;
+            if(map[R+dx[D]][C+dy[D]] == 0){
+                R += dx[D];
+                C += dy[D];
             }
         }
     }
 
-    for(int i = 0; i < N; i++){
+    int count = 0;
+    for(int i = 0; i< N; i++){
         for(int j = 0; j < M; j++){
             if(map[i][j] == 2){
                 count += 1;
@@ -66,8 +52,6 @@ int main(){
     }
 
     cout << count << '\n';
-
-    //cout << DFS(r, c, d) << '\n';
 
     return 0;
 }
