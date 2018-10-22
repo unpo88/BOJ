@@ -1,44 +1,50 @@
-#include <cstdio>
+#include <iostream>
+#include <vector>
 #include <algorithm>
 using namespace std;
 
-struct time_table{
-    int start_time;
-    int end_time;
+struct node{
+    int start, end;
+    node(int s, int e):
+        start(s), end(e)    {}
 };
 
 int N;
 
-time_table arr[100000];
+vector<node> v;
 
-int answer;
-int now;
-
-bool cmp(const time_table &a, const time_table &b){
-    if(a.end_time == b.end_time){
-        return a.start_time < b.start_time;
+bool cmp(const node &a, const node &b){
+    if(a.end == b.end){
+        return a.start < b.start;
     }else{
-        return a.end_time < b.end_time;
+        return a.end < b.end;
     }
 }
 
 int main(){
-    scanf("%d", &N);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    cin >> N;
+
     for(int i = 0; i < N; i++){
-        scanf("%d %d", &arr[i].start_time, &arr[i].end_time);
+        int start, end;
+        cin >> start >> end;
+        v.push_back(node(start, end));
     }
 
-    // 오름차순 정렬, 만약 끝나는 시간이 같으면 시작 시간이 작은 순으로
-    sort(arr, arr + N, cmp);
+    sort(v.begin(), v.end(), cmp);
 
+    int answer = 0;
+    int now = 0;
     for(int i = 0; i < N; i++){
-        if(now <= arr[i].start_time){
-            now = arr[i].end_time;
+        if(now <= v[i].start){
+            now = v[i].end;
             answer++;
         }
     }
 
-    printf("%d\n", answer);
-
-    return 0;   
+    cout << answer << '\n';
+    return 0;
 }
