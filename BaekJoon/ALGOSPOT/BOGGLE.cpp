@@ -16,6 +16,27 @@ bool check = false;
 const int dx[8] = { -1, -1, -1, 0, 0, 1, 1, 1 };
 const int dy[8] = { -1, 0, 1, -1, 1, -1, 0, 1 };
 
+bool isRange(int x, int y){
+    if(x < 0 || y < 0 || x >= 5 || y >= 5){
+        return false;
+    }
+    return true;
+}
+
+bool hasWord(int x, int y, const string& word){
+    if(!isRange(x, y))  return false;
+    if(map[x][y] != word[0])    return false;
+    if(word.size() == 1)    return true;
+    for(int i = 0; i < 8; i++){
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+        if(hasWord(nx, ny, word.substr(1))){
+            return true;
+        }
+    }
+    return false;
+}
+
 void board_Init(){
     for(int i = 0; i < 5; i++){
         cin >> map[i];
