@@ -2,11 +2,12 @@
 #include <cstring>
 using namespace std;
 
-int N, M;
+int C, N, M;
 
-bool map[11][11];
+bool map[10][10];
+bool taken[10];
 
-int countPair(bool taken[10]){
+int countPair(){
     int idx = -1;
     for(int i = 0; i < N; i++){
         if(!taken[i]){
@@ -15,18 +16,16 @@ int countPair(bool taken[10]){
         }
     }
 
-    if(idx == -1)  return true;
+    if(idx == -1)   return 1;
 
     int ret = 0;
-
     for(int i = idx + 1; i < N; i++){
         if(!taken[i] && map[idx][i]){
-            taken[idx] = taken[i] = true;
-            ret += countPair(taken);
-            taken[idx] = taken[i] = false;
+            taken[i] = taken[idx] = true;
+            ret += countPair();
+            taken[i] = taken[idx] = false;
         }
     }
-
     return ret;
 }
 
@@ -34,12 +33,12 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-
-    int C;
+    
     cin >> C;
 
     while(C--){
         memset(map, false, sizeof(map));
+        memset(taken, false, sizeof(taken));
 
         cin >> N >> M;
 
@@ -49,10 +48,8 @@ int main(){
             map[a][b] = map[b][a] = true;
         }
 
-        bool taken[11];
-        memset(taken, false, sizeof(taken));
-        cout << countPair(taken) << '\n';
+        cout << countPair() << '\n';
     }
-
+    
     return 0;
 }
